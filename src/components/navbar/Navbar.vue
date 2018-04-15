@@ -14,9 +14,14 @@
 
 <template>
   <v-ons-toolbar class="home-toolbar">
-    <div class="left">
+    <div v-if="navType=='menu'" class="left">
       <v-ons-toolbar-button @click="toggleMenu()">
         <v-ons-icon icon="ion-navicon, material:md-menu"></v-ons-icon>
+      </v-ons-toolbar-button>
+    </div>
+    <div v-else-if="navType=='back'" class="left">
+      <v-ons-toolbar-button @click="$router.push({name:'home'})">
+        <v-ons-icon icon="ion-chevron-left, material:md-arrow-left"></v-ons-icon>
       </v-ons-toolbar-button>
     </div>
     <div class="center">{{ msg }}</div>
@@ -26,10 +31,13 @@
 <script>
 export default {
   name: 'navbar',
-  data() {
-    return {
-      msg: 'おにく判定',
-    };
+  props: {
+    msg: {
+      default: 'えはまデート',
+    },
+    navType: {
+      default: 'menu',
+    },
   },
   methods: {
     toggleMenu() {
