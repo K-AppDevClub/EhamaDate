@@ -31,18 +31,33 @@
       <img src="../../assets/love.jpeg" width="12" height="12">
       デートプランを探す
     </v-ons-list-header>
-        <v-ons-list-item v-for='region in regions' :key='region' @click="$router.push({ name: region.url});">
+        <v-ons-list-item v-for='region in regions' :v-bind='region' @click="$router.push({ name: region.url});">
           {{region.name}}
         </v-ons-list-item>
     </v-ons-list>
-    <h1>話題のデート体験記</h1>
-    <el-carousel height="250px">
-    <el-carousel-item v-for="item in experiences" :key="item">
-      <h3>{{item.title}}</h3>
-      {{item.detail}}
-      <router-link :to=item.path>続きを読む</router-link>
-    </el-carousel-item>
-    </el-carousel>  
+    <v-ons-card>
+    <h3>話題のデート体験記</h3>
+    <v-ons-carousel style="width: 100%; height: 200px"
+      swipeable auto-scroll overscrollable
+      :index.sync="carouselIndex"
+    >
+      <v-ons-carousel-item v-for='item in experiences' 
+        :v-bind='item.title'
+        :style="{backgroundColor: item.color}"
+        >
+        <div style="tex-align: center; font-size: 30px; margin-top: 20px; margin-left: 10px; color: #fff;">
+          {{ item.title }}
+        </div>
+        <p style="margin-left: 30pt; color: #fff;">{{ item.detail }}</p>
+      </v-ons-carousel-item>
+    </v-ons-carousel>
+  
+    <div :style='dots'>
+      <span :index="dotIndex - 1" v-for="dotIndex in Object.keys(experiences).length" :key="dotIndex" style="cursor: pointer" @click="carouselIndex = dotIndex - 1">
+        {{ carouselIndex === dotIndex - 1 ? '\u25CF' : '\u25CB' }}
+      </span>
+    </div>
+    </v-ons-card>
     <v-ons-button modifier="cta" style="margin: 6px 0" @click="$router.push({ name: 'create-plan' });">作成</v-ons-button>
   </div>
   </v-ons-page>
@@ -78,13 +93,25 @@ export default {
           title: 'えはまの奮発日記',
           detail: 'tinderで知り合った女性と食事することになりました。しかし女性の右手には...',
           path: 'detail-plan',
+          color: '#085078',
         },
         {
           title: 'ほげ',
           detail: 'hogehoge',
           path: 'detail-plan',
+          color: '#373B44',
         },
       ],
+      carouselIndex: 0,
+      dots: {
+        textAlign: 'center',
+        fontSize: '30px',
+        color: '#fff',
+        position: 'absolute',
+        bottom: '40px',
+        left: 0,
+        right: 0,
+      },
     };
   },
 };
