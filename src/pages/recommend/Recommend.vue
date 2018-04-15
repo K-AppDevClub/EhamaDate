@@ -1,7 +1,8 @@
 <template>
   <ons-page>
-    <navbar></navbar>
-    <h1 align="center"> 鹿児島県内のデートスポット </h1>
+    <!-- <navbar></navbar> -->
+    <navbar navType="back" msg="鹿児島県内のデートスポット"></navbar>
+    <!-- <h1 align="center"> 鹿児島県内のデートスポット </h1> -->
     <!-- <plan-component></plan-component>
     <plan-component></plan-component>
     <plan-component></plan-component> -->
