@@ -42,7 +42,7 @@ export default {
       regions: [
         {
           name: '地域で探す',
-          url: 'posts',
+          url: 'region',
         },
         {
           name: 'プランで探す',
