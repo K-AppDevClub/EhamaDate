@@ -3,6 +3,7 @@ import PostsPage from './pages/posts/PostsPage';
 import TestPage from './pages/test/Test';
 import CreatePlan from './pages/create-plan/CreatePlan';
 import Recommend from './pages/recommend/Recommend';
+import DetailPlan from './pages/detail-plan/DetailPlan';
 
 export default [
   { name: 'home', path: '/', component: HomePage },
@@ -10,4 +11,5 @@ export default [
   { name: 'test', path: '/test', component: TestPage },
   { name: 'create-plan', path: '/create-plan', component: CreatePlan },
   { name: 'recommend', path: '/recommend', component: Recommend },
+  { name: 'detail-plan', path: '/detail-plan', component: DetailPlan },
 ];
