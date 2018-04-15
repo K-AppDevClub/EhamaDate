@@ -3,6 +3,10 @@
 import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
 
+import Element from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import locale from 'element-ui/lib/locale/lang/ja';
+
 import Vue from 'vue';
 import VueOnsen from 'vue-onsenui';
 import VueRouter from 'vue-router';
@@ -11,6 +15,7 @@ import routes from './routes';
 
 Vue.config.productionTip = false;
 
+Vue.use(Element, { locale });
 Vue.use(VueOnsen);
 Vue.use(VueRouter);
 
