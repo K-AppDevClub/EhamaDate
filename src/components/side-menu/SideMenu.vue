@@ -16,7 +16,11 @@
   <v-ons-page>
     <v-ons-toolbar modifier="transparent"></v-ons-toolbar>
     <div class="header">
-      <img src="../../assets/onsenui-logo.png">
+      <img src="../../assets/noimage.jpeg">
+    </div>
+    <div align="center">
+      <b><p>{{userInfo.userName}}</p></b>
+      <p>user ID: {{userInfo.userID}}</p>
     </div>
 
     <v-ons-list-title>Onsen UI Essential Links</v-ons-list-title>
@@ -40,6 +44,10 @@ export default {
   data() {
     return {
       msg: 'OpenWeatherMap',
+      userInfo: {
+        userName: 'えはま',
+        userID: 'ehama',
+      },
       essentialLinks: [
         {
           label: 'Home',
