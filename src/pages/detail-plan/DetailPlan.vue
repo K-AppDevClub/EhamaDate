@@ -1,6 +1,6 @@
 <template>
   <ons-page>
-    <navbar></navbar>
+    <navbar navType="back" msg="プラン詳細"></navbar>    
     <v-ons-card>
         <h2> プラン名：{{hello}}</h2>
         <h4 >概要:</h4>
