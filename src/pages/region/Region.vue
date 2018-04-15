@@ -12,6 +12,7 @@
 		</div>
 		<el-tree
   :data="data"
+  node-key="id"
   :props="defaultProps"
   accordion
   @node-click="handleNodeClick">
@@ -30,31 +31,27 @@ export default {
   data() {
     return {
       data: [{
-        label: 'Level one 1',
+        label: '北海道',
         children: [{
-          label: 'Level two 1-1',
-          children: [{
-            label: 'Level three 1-1-1',
-          }],
+          id: 1,
+          label: '北海道',
         }],
       }, {
-        label: 'Level one 2',
+        label: '東北',
         children: [{
-          label: 'Level two 2-1',
-          children: [{
-            label: 'Level three 2-1-1',
-          }],
+          id: 2,
+          label: '青森県',
         }, {
-          label: 'Level two 2-2',
-          children: [{
-            label: 'Level three 2-2-1',
-          }],
+          id: 3,
+          label: '岩手県',
         }],
       }, {
         label: '九州',
         children: [{
+          id: 40,
           label: '福岡',
         }, {
+          id: 46,
           label: '鹿児島',
         }],
       }],
@@ -66,8 +63,10 @@ export default {
   },
   methods: {
     handleNodeClick(data) {
-      this.$router.push({ name: 'recommend' });
-      console.log(data);
+      if (!data.children) {
+        this.$router.push({ name: 'recommend', params: data.id });
+        console.log(data.id);
+      }
     },
   },
 };
