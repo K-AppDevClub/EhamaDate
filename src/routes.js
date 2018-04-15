@@ -6,6 +6,7 @@ import CreatePlan from './pages/create-plan/CreatePlan';
 import Recommend from './pages/recommend/Recommend';
 import DetailPlan from './pages/detail-plan/DetailPlan';
 import RegionPage from './pages/region/Region';
+import UserPage from './pages/user-page/UserPage';
 
 
 export default [
@@ -16,4 +17,5 @@ export default [
   { name: 'recommend', path: '/recommend', component: Recommend },
   { name: 'detail-plan', path: '/detail-plan', component: DetailPlan },
   { name: 'region', path: '/region', component: RegionPage },
+  { name: 'userPage', path: '/user-page', component: UserPage },
 ];

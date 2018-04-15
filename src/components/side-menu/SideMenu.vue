@@ -19,7 +19,7 @@
       <img src="../../assets/noimage.jpeg">
     </div>
     <div align="center">
-      <b><p>{{userInfo.userName}}</p></b>
+      <router-link to="user-page">{{userInfo.userName}}</router-link>
       <p>user ID: {{userInfo.userID}}</p>
     </div>
 

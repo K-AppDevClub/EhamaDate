@@ -46,7 +46,7 @@
         <div style="tex-align: center; font-size: 30px; margin-top: 20px; margin-left: 10px; color: #fff;">
           {{ item.title }}
         </div>
-        <p style="margin-left: 30pt; color: #fff;">{{ item.detail }}</p>
+        <p style="margin-left: 10pt; margin-right: 10pt; color: #fff;">{{ item.detail }}</p>
       </v-ons-carousel-item>
     </v-ons-carousel>
     </v-ons-card>
@@ -62,7 +62,7 @@
         <div style="tex-align: center; font-size: 30px; margin-top: 20px; margin-left: 10px; color: #fff;">
           {{ item.title }}
         </div>
-        <p style="margin-left: 30pt; color: #fff;">{{ item.detail }}</p>
+        <p style="margin-left: 10pt; margin-right: 10pt; color: #fff;">{{ item.detail }}</p>
       </v-ons-carousel-item>
     </v-ons-carousel>
     </v-ons-card>
