@@ -10,7 +10,7 @@
 <template>
   <v-ons-page>
     <navbar></navbar>
-  <div class='page-content'>
+  <div class='page-content' align='center'>
     <v-ons-list> 
     <v-ons-list-header>
       <img src="../../assets/love.jpeg" width="12" height="12">
@@ -20,6 +20,7 @@
           {{region.name}}
         </v-ons-list-item>
     </v-ons-list>
+    <v-ons-button modifier="cta" style="margin: 6px 0" @click="$router.push({ name: 'create-plan' });">作成</v-ons-button>
   </div>
   </v-ons-page>
 </template>
