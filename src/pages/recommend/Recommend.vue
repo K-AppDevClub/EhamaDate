@@ -7,7 +7,8 @@
     <plan-component></plan-component>
     <plan-component></plan-component> -->
 
-    <v-ons-list v-for="item in items" v-bind:key="items.id" modifier="inset" style="margin: 10px 40px 20px 30px">
+    {{ $route.params.id }}
+    <v-ons-list v-for="item in items" v-bind:key="item.id" modifier="inset" style="margin: 10px 40px 20px 30px">
       <v-ons-list-header> {{ item.id }}位 <v-ons-icon v-bind:icon='item.icon'></v-ons-icon></v-ons-list-header>
       <v-ons-list-item modifier="longdivider" tappable @click="$router.push({ name: 'detail-plan' });">
         <div class="left">
@@ -32,6 +33,9 @@ export default {
     Navbar,
     PlanComponent,
   },
+  // mounted() {
+  //   console.log(this.$route.params.id);
+  // },
   data() {
     return {
       items: [

@@ -64,7 +64,7 @@ export default {
   methods: {
     handleNodeClick(data) {
       if (!data.children) {
-        this.$router.push({ name: 'recommend', params: data.id });
+        this.$router.push({ name: 'recommend', params: { id: data.id } });
         console.log(data.id);
       }
     },
