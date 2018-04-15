@@ -40,7 +40,7 @@
     <el-carousel-item v-for="item in experiences" :key="item">
       <h3>{{item.title}}</h3>
       {{item.detail}}
-      <p font-size="2px">続きを読む</p>
+      <router-link :to=item.path>続きを読む</router-link>
     </el-carousel-item>
     </el-carousel>  
     <v-ons-button modifier="cta" style="margin: 6px 0" @click="$router.push({ name: 'create-plan' });">作成</v-ons-button>
@@ -77,10 +77,12 @@ export default {
         {
           title: 'えはまの奮発日記',
           detail: 'tinderで知り合った女性と食事することになりました。しかし女性の右手には...',
+          path: 'detail-plan',
         },
         {
           title: 'ほげ',
           detail: 'hogehoge',
+          path: 'detail-plan',
         },
       ],
     };
