@@ -19,8 +19,8 @@
       <img src="../../assets/noimage.jpeg">
     </div>
     <div align="center">
-      <router-link to="user-page">{{userInfo.userName}}</router-link>
-      <p>user ID: {{userInfo.userID}}</p>
+      <router-link to="user-page">{{info.name}}</router-link>
+      <p>user ID: {{info.ID}}</p>
     </div>
 
     <v-ons-list-title>Onsen UI Essential Links</v-ons-list-title>
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import store from '../../store';
 
 export default {
@@ -44,10 +45,6 @@ export default {
   data() {
     return {
       msg: 'OpenWeatherMap',
-      userInfo: {
-        userName: 'えはま',
-        userID: 'ehama',
-      },
       essentialLinks: [
         {
           label: 'Home',
@@ -67,6 +64,9 @@ export default {
       ],
     };
   },
+  computed: mapGetters({
+    info: 'getInfo',
+  }),
   methods: {
     goTo(routeName) {
       this.$router.push({ name: routeName });
