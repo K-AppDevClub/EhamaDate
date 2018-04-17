@@ -14,8 +14,8 @@
     <div align="center">
       <h3>My Page</h3>
       <img src="../../assets/noimage.jpeg">
-      <b><p>{{userInfo.userName}}</p></b>
-      <p>user ID: {{userInfo.userID}}</p>
+      <b><p>{{info.name}}</p></b>
+      <p>user ID: {{info.ID}}</p>
     </div>
     </v-ons-card>
 
@@ -25,6 +25,7 @@
 
 
 <script>
+import { mapGetters } from 'vuex';
 import LoadingIndicator from '../../components/loading-indicator/LoadingIndicator';
 import Navbar from '../../components/navbar/Navbar';
 
@@ -34,13 +35,8 @@ export default{
     LoadingIndicator,
     Navbar,
   },
-  data() {
-    return {
-      userInfo: {
-        userName: '',
-        userID: '',
-      },
-    };
-  },
+  computed: mapGetters({
+    info: 'getInfo',
+  }),
 };
 </script>
