@@ -94,7 +94,7 @@ export default {
   mounted() {
     const apiURL = `http://59.157.6.140:3000/prefectures/${this.$route.params.id}`;
     axios.get(apiURL).then((res) => {
-      this.plans = res.data;
+      this.plans = res.data.plans;
       console.log(res);
     })
     .catch(err => console.log(err));
