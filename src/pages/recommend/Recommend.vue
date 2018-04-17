@@ -2,7 +2,7 @@
   <!-- <ons-page> -->
   <ons-page>
     <!-- <navbar></navbar> -->
-    <navbar navType="back" msg="鹿児島県内のデートスポット"></navbar>
+    <navbar navType="back" v-bind:msg="planname"></navbar>
     <!-- <h1 align="center"> 鹿児島県内のデートスポット </h1> -->
     <!-- <plan-component></plan-component>
     <plan-component></plan-component>
@@ -95,6 +95,7 @@ export default {
     const apiURL = `http://59.157.6.140:3000/prefectures/${this.$route.params.id}`;
     axios.get(apiURL).then((res) => {
       this.plans = res.data.plans;
+      this.planname = `${res.data.name}のデートスポット`;
       console.log(res);
     })
     .catch(err => console.log(err));
@@ -118,6 +119,7 @@ export default {
       coverTarget: false,
 
       plans: [],
+      planname: '',
       state: true,
       count: 5,
       random_nam: Math.random(),
