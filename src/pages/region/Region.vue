@@ -12,15 +12,16 @@
 		</div>
 		<el-tree
   :data="data"
-  node-key="id"
   :props="defaultProps"
   accordion
   @node-click="handleNodeClick">
     </el-tree>
+    <!-- node-key="id" -->
 	</v-ons-page>
 </template>
 
 <script>
+import axios from 'axios';
 import Navbar from '../../components/navbar/Navbar';
 
 export default {
@@ -29,32 +30,34 @@ export default {
     Navbar,
   },
   data() {
+    const arr = [];
+    axios.get('http://59.157.6.140:3000/regions')
+    .then((res) => {
+      for (let i = 0; i < res.data.length; i += 1) {
+        const regions = { label: res.data[i].name, id: res.data[i].id, children: [] };
+        arr.push(regions);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+    axios.get('http://59.157.6.140:3000/prefectures')
+    .then((res) => {
+      for (let j = 0; j < res.data.length; j += 1) {
+        const prefectures = {
+          label: res.data[j].name,
+          regionId: res.data[j].region_id,
+          id: res.data[j].id };
+        arr[prefectures.regionId - 1].children.push(prefectures);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
     return {
-      data: [{
-        label: '北海道',
-        children: [{
-          id: 1,
-          label: '北海道',
-        }],
-      }, {
-        label: '東北',
-        children: [{
-          id: 2,
-          label: '青森県',
-        }, {
-          id: 3,
-          label: '岩手県',
-        }],
-      }, {
-        label: '九州',
-        children: [{
-          id: 40,
-          label: '福岡',
-        }, {
-          id: 46,
-          label: '鹿児島',
-        }],
-      }],
+      data: arr,
       defaultProps: {
         children: 'children',
         label: 'label',
