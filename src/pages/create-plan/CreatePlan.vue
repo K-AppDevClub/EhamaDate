@@ -29,13 +29,13 @@
       </v-ons-list-item>
 
       <v-ons-list-header>コース</v-ons-list-header>
-      <v-ons-list-item v-for="(item,i) in courses" v-bind:key="item.id">
-        <v-ons-input v-bind:value="item.id" placeholder="コース" float ></v-ons-input>
+      <v-ons-list-item v-for="(item,i) in courses" v-bind:key="item.uniq">
+        <v-ons-input v-bind:value="item.uniq" placeholder="コース" float ></v-ons-input>
         <v-ons-button modifier="cta" style="text-align:right; margin: 6px 0" @click="removeCourse(i);">削除</v-ons-button>
       </v-ons-list-item>
 
       <center>
-        <v-ons-button modifier="outline" style="margin: 6px 0" @click="addCourse();">コース追加</v-ons-button>
+        <v-ons-button modifier="quiet" style="margin: 6px 0" @click="addCourse();">コースを追加</v-ons-button>
       </center>
     </v-ons-list>
     <br>
@@ -64,35 +64,34 @@ export default {
     };
   },
   mounted() {
-    console.log(this);
     axios.get('http://59.157.6.140:3000/prefectures')
     .then((res) => {
-      console.log(res);
       this.prefs = res.data;
     });
   },
   methods: {
     addCourse() {
       const rand = Math.floor(Math.random() * 100000);
-      this.courses.push({ id: rand, name: '' });
+      this.courses.push({ uniq: rand, spot_id: 1, time: '18:00:00' });
     },
     removeCourse(num) {
       this.courses.splice(num, 1);
     },
     postPlan() {
+      const courses_params = {};
+      this.courses.forEach((v)=>{
+        courses_params[v.uniq] = v
+
+      });
       axios.post('http://59.157.6.140:3000/plans', {
         plan: {
           title: this.planname,
           detail: this.description,
           prefecture_id: this.pref_id,
-          courses_attributes: { 0: { spot_id: 1 } },
+          courses_attributes: courses_params,
         },
       })
       .then(res => console.log(res));
-    },
-    goTo(routeName) {
-      this.$router.push({ name: routeName });
-      // store.commit('toggleMenu', false);
     },
   },
 };
