@@ -4,7 +4,7 @@
     <v-ons-card>
         <h2>{{post.title}}</h2>
         <h4 >概要:</h4>
-        <p>{{post.comment}}</p>
+        <p>{{post.detail}}</p>
     </v-ons-card>
     <v-ons-card>
         <h4>行ったスポット：</h4>
@@ -22,7 +22,7 @@
     </v-ons-card>
     <v-ons-card>
         <h4>感想：</h4>
-        <p>めっちゃよかった</p>
+        <p>{{post.comment}}</p>
         <p></p>
     </v-ons-card>
     <v-ons-button modifier="cta" style="margin: 60px 0px" @click="$router.push({ name: 'recommend' });">戻る</v-ons-button>
@@ -44,11 +44,12 @@ export default {
   data() {
     return {
       // url: 'http://59.157.6.140:3000/plans/1',
-      url: `http://59.157.6.140:3000/plans/${this.route.params.id}`,
+      url: `http://59.157.6.140:3000/plans/${this.$route.params.id}`,
       post: [],
     };
   },
   created() {
+    console.log(this.$route.params.id);
     axios.get(this.url)
     .then((response) => {
       this.post = response.data;
