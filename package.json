@@ -17,9 +17,9 @@
   "dependencies": {
     "axios": "^0.16.2",
     "element-ui": "^2.3.4",
-    "onsenui": "~2.4.0",
+    "onsenui": "~2.9.0",
     "vue": "^2.3.3",
-    "vue-onsenui": "~2.0.0",
+    "vue-onsenui": "~2.5.0",
     "vue-router": "^2.6.0",
     "vuex": "^2.3.1"
   },
