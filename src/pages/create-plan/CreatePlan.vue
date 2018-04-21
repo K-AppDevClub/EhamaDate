@@ -1,9 +1,3 @@
-<style>
-.title {
-  text-align: center;
-}
-</style>
-
 <template>
   <ons-page>
     <navbar navType="back" msg="プラン作成"></navbar>
@@ -28,29 +22,28 @@
       </v-ons-list-item>
 
       <v-ons-list-header>コース</v-ons-list-header>
-      <v-ons-list-item v-for="(item,i) in courses" v-bind:key="item.uniq">
+      <v-ons-list-item tappable v-for="(item,i) in courses" 
+        v-bind:key="item.uniq" @click="addCourse(i)">
         {{ item.time }} 
         <span style="margin-left: 20px;"> {{item.name}} </span>
         <div class="right">
-          <v-ons-button modifier="cta" style="text-align:right; margin: 6px 10px 0 10px" @click="removeCourse(i);">削除</v-ons-button>
+          <v-ons-button modifier="cta" @click="removeCourse(i);$event.stopPropagation()">削除</v-ons-button>
         </div>
       </v-ons-list-item>
 
       <center>
-        <v-ons-button modifier="quiet" style="margin: 6px 0" @add-course="pushCourse" @click="addCourse">コースを追加</v-ons-button>
+        <v-ons-button modifier="quiet" style="margin: 6px 0" @click="addCourse">コースを追加</v-ons-button>
       </center>
     </v-ons-list>
     <br>
     <center>
-      <v-ons-button modifier="cta" style="margin: 6px 0" @click="postPlan();">プラン作成</v-ons-button>
+      <v-ons-button modifier="cta" @click="postPlan();">プラン作成</v-ons-button>
     </center>
   </ons-page>
 </template>
 
 <script>
 import axios from 'axios';
-import { mapGetters } from 'vuex';
-import store from '../../store';
 import Navbar from '../../components/navbar/Navbar';
 import AddCourse from '../../pages/add-course/AddCourse';
 
@@ -59,23 +52,19 @@ export default {
   components: {
     Navbar,
   },
-  props: {
-    msg: {
-      default: 'えはまデート',
-    },
-  },
   data() {
     return {
       planname: '',
       description: '',
       prefs: [],
-      // courses: [],
       pref_id: null,
     };
   },
-  computed: mapGetters({
-    courses: 'getNewCourses',
-  }),
+  computed: {
+    courses() {
+      return this.$store.state.createPlan.courses
+    }
+  },
   mounted() {
     axios.get('http://59.157.6.140:3000/prefectures')
     .then((res) => {
@@ -87,18 +76,16 @@ export default {
     });
   },
   methods: {
-    addCourse() {
+    aai(item){
+      console.log(item)
+    },
+    addCourse(num) {
       this.$emit('push-page', {
         extends: AddCourse,
         onsNavigatorProps: {
-          plan_id: 1,
+          index: num,
         }
       })
-    },
-    pushCourse() {
-      console.log("handle add course")
-      const rand = Math.floor(Math.random() * 100000);
-      this.courses.push({ uniq: rand, spot_id: 1, time: '18:00:00' });
     },
     removeCourse(num) {
       this.$store.commit('removeCourse', num);

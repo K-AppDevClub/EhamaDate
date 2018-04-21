@@ -1,9 +1,3 @@
-<style>
-.title {
-  text-align: center;
-}
-</style>
-
 <template>
   <ons-page>
     <navbar navType="back" msg="コースを追加"></navbar>
@@ -12,7 +6,7 @@
       <v-ons-list-header>時間</v-ons-list-header>
       <v-ons-list-item>
         <el-time-select
-          v-model="time"
+          v-model="course.time"
           :picker-options="{
             start: '00:00',
             step: '00:15',
@@ -24,18 +18,21 @@
 
       <v-ons-list-header>場所</v-ons-list-header>
       <v-ons-list-item>
-        <v-ons-input placeholder="スポット名を検索" float v-model="course_name"></v-ons-input>
+        <v-ons-input placeholder="スポット名を検索" float v-model="course.name"></v-ons-input>
       </v-ons-list-item>
 
       <v-ons-list-header>詳細</v-ons-list-header>
       <v-ons-list-item>
-        <v-ons-input placeholder="コースの説明" float v-model="description"></v-ons-input>
+        <v-ons-input placeholder="コースの説明" float v-model="course.description"></v-ons-input>
       </v-ons-list-item>
 
     </v-ons-list>
     <br>
     <center>
-      <v-ons-button modifier="cta" style="margin: 6px 0" @click="addCourse">コース追加</v-ons-button>
+      <v-ons-button modifier="cta" style="margin: 6px 0" @click="addCourse">
+        <span v-if="edit">変更</span>
+        <span v-else>コース追加</span>
+      </v-ons-button>
     </center>
   </ons-page>
 </template>
@@ -50,31 +47,37 @@ export default {
     Navbar,
   },
   props: {
-    msg: {
-      default: 'えはまデート',
+    index: {
+      default: false
     },
   },
   data() {
     return {
-      course_name: '',
-      description: '',
-      time: "19:00",
+      course: {
+        uniq: Math.floor(Math.random() * 100000),
+        name: '',
+        description: '',
+        time: "19:00",
+      },
+      edit: false,
+      idx: 0,
     };
   },
   mounted() {
-    axios.get('http://59.157.6.140:3000/prefectures')
-    .then((res) => {
-      this.prefs = res.data;
-    });
+    if(Math.round(this.$props.index) === this.$props.index) {
+      // 直にstoreを代入すると参照渡しになっちゃうのでjson再変換すべき？
+      // this.course = JSON.parse(JSON.stringify(this.$store.state.createPlan.courses[this.$props.index]));
+      this.course = this.$store.state.createPlan.courses[this.$props.index];
+      this.edit = true;
+      this.idx = this.$props.index;
+    }
   },
   methods: {
     addCourse() {
-      const rand = Math.floor(Math.random() * 100000);
       this.$store.commit('addCourse', { 
-        uniq: rand,
-        name: this.course_name, 
-        description: this.description, 
-        time: this.time, 
+        edit: this.edit,
+        index: this.idx,
+        data: this.course,
       });
       this.$emit('pop-page');
     },
