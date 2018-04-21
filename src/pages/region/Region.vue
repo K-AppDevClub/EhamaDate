@@ -4,7 +4,6 @@
 }
 </style>
 <template>
-
 	<v-ons-page>
 		<navbar navType="back" msg="地域選択"></navbar>
     <v-ons-list-header>
@@ -37,20 +36,19 @@ export default {
         const regions = { label: res.data[i].name, id: res.data[i].id, children: [] };
         arr.push(regions);
       }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-
-    axios.get('http://59.157.6.140:3000/prefectures')
-    .then((res) => {
-      for (let j = 0; j < res.data.length; j += 1) {
-        const prefectures = {
-          label: res.data[j].name,
-          regionId: res.data[j].region_id,
-          id: res.data[j].id };
-        arr[prefectures.regionId - 1].children.push(prefectures);
-      }
+      axios.get('http://59.157.6.140:3000/prefectures')
+      .then((res) => {
+        for (let j = 0; j < res.data.length; j += 1) {
+          const prefectures = {
+            label: res.data[j].name,
+            regionId: res.data[j].region_id,
+            id: res.data[j].id };
+          arr[(prefectures.regionId - 1)].children.push(prefectures);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     })
     .catch((error) => {
       console.log(error);
