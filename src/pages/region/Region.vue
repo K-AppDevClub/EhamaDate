@@ -6,23 +6,23 @@
 <template>
 
 	<v-ons-page>
-		<navbar></navbar>
-		<div class="page-content">
-			<h3 class="page-title">region page</h3>
-		</div>
+		<navbar navType="back" msg="地域選択"></navbar>
+    <v-ons-list-header>
+      地方一覧
+    </v-ons-list-header>
 		<el-tree
-  :data="data"
-  :props="defaultProps"
-  accordion
-  @node-click="handleNodeClick">
+      :data="data"
+      :props="defaultProps"
+      accordion
+      @node-click="handleNodeClick">
     </el-tree>
-    <!-- node-key="id" -->
 	</v-ons-page>
 </template>
 
 <script>
 import axios from 'axios';
 import Navbar from '../../components/navbar/Navbar';
+import Recommend from '../../pages/recommend/Recommend';
 
 export default {
   name: 'region',
@@ -67,7 +67,13 @@ export default {
   methods: {
     handleNodeClick(data) {
       if (!data.children) {
-        this.$router.push({ name: 'recommend', params: { id: data.id } });
+        this.$emit('push-page', {
+          extends: Recommend,
+          onsNavigatorProps: {
+            pref_id: data.id,
+          }
+        })
+        // this.$router.push({ name: 'recommend', params: { id: data.id } });
         console.log(data.id);
       }
     },

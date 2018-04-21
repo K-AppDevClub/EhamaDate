@@ -37,7 +37,7 @@
             <i class="zmdi zmdi-favorite-outline" style="color: blue;"></i>
             &nbsp;
           </div>
-          <div class="center" tappable @click="$router.push({ name: 'detail-plan', params: { id: plan.id } });">
+          <div class="center" tappable @click="goPlan">
             <span class="list-item__title">
               {{ plan.title }}
             </span>
@@ -84,6 +84,7 @@
 import axios from 'axios';
 import Navbar from '../../components/navbar/Navbar';
 import PlanComponent from '../../components/plan/Plan';
+import DetailPlan from '../../pages/detail-plan/DetailPlan';
 
 export default {
   name: 'test',
@@ -91,8 +92,13 @@ export default {
     Navbar,
     PlanComponent,
   },
+  props: {
+    pref_id: {
+      default: 1,
+    },
+  },
   mounted() {
-    const apiURL = `http://59.157.6.140:3000/prefectures/${this.$route.params.id}`;
+    const apiURL = `http://59.157.6.140:3000/prefectures/${this.pref_id}`;
     axios.get(apiURL).then((res) => {
       this.plans = res.data.plans;
       this.planname = `${res.data.name}のデートスポット`;
@@ -104,6 +110,14 @@ export default {
   //   console.log(this.$route.params.id);
   // },
   methods: {
+    goPlan() {
+      this.$emit('push-page', {
+        extends: DetailPlan,
+        onsNavigatorProps: {
+          plan_id: 1,
+        }
+      })
+    },
     showPopover(event, direction, coverTarget = false) {
       this.popoverTarget = event;
       this.popoverDirection = direction;

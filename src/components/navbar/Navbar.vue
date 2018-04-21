@@ -20,9 +20,7 @@
       </v-ons-toolbar-button>
     </div>
     <div v-else-if="navType=='back'" class="left">
-      <v-ons-toolbar-button @click="$router.go(-1)">
-        <v-ons-icon icon="ion-chevron-left, material:md-arrow-left"></v-ons-icon>
-      </v-ons-toolbar-button>
+      <v-ons-back-button>戻る</v-ons-back-button>
     </div>
     <div class="center">{{ msg }}</div>
   </v-ons-toolbar>

@@ -54,6 +54,11 @@ export default {
   components: {
     Navbar,
   },
+  props: {
+    msg: {
+      default: 'えはまデート',
+    },
+  },
   data() {
     return {
       planname: '',

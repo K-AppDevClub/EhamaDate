@@ -42,7 +42,11 @@ navbar {
 
     <v-ons-splitter-content>
       <transition name="slide-fade">
-        <router-view></router-view>
+        <v-ons-navigator swipeable
+          :page-stack="pageStack"
+          @push-page="pageStack.push($event);"
+        ></v-ons-navigator>
+        <!-- <router-view></router-view> -->
       </transition>
     </v-ons-splitter-content>
   </v-ons-splitter>
@@ -51,11 +55,17 @@ navbar {
 
 <script>
 import SideMenu from './components/side-menu/SideMenu';
+import HomePage from './pages/home/HomePage';
 import store from './store';
 
 export default {
   name: 'app',
   store,
+  data() {
+    return {
+      pageStack: [HomePage]
+    }
+  },
   computed: {
     menuIsOpen() {
       return store.state.menuIsOpen;
@@ -65,6 +75,10 @@ export default {
     SideMenu,
   },
   methods: {
+    aai(){
+      console.log("push-page event");
+      this.pageStack.push($event);
+    },
     onUserInteraction(event) {
       console.log(event);   // on click ons-splitter-side-mask, event always false(?)
       store.commit('toggleMenu', event);

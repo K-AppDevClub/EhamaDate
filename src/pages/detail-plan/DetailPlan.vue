@@ -41,15 +41,20 @@ export default {
     Navbar,
     EhamaForm,
   },
+  props: {
+    plan_id: {
+      default: 1,
+    },
+  },
   data() {
     return {
       // url: 'http://59.157.6.140:3000/plans/1',
-      url: `http://59.157.6.140:3000/plans/${this.$route.params.id}`,
+      url: `http://59.157.6.140:3000/plans/${this.plan_id}`,
       post: [],
     };
   },
   created() {
-    console.log(this.$route.params.id);
+    console.log(this.plan_id);
     axios.get(this.url)
     .then((response) => {
       this.post = response.data;

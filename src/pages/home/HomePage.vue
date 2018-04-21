@@ -30,7 +30,7 @@
       <img src="../../assets/love.jpeg" width="12" height="12">
       デートプランを探す
     </v-ons-list-header>
-        <v-ons-list-item v-for='region in regions' :v-bind='region.name' @click="$router.push({ name: region.url});">
+        <v-ons-list-item v-for='region in regions' :v-bind='region.name' @click="goRegion">
           {{region.name}}
         </v-ons-list-item>
     </v-ons-list>
@@ -66,7 +66,7 @@
       </v-ons-carousel-item>
     </v-ons-carousel>
     </v-ons-card>
-    <v-ons-button modifier="cta" style="margin: 6px 0" @click="$router.push({ name: 'create-plan' });">作成</v-ons-button>
+    <v-ons-button modifier="cta" style="margin: 6px 0" @click="goCreate">作成</v-ons-button>
   </div>
   </v-ons-page>
 </template>
@@ -74,6 +74,8 @@
 <script>
 // import axios from 'axios';
 import LoadingIndicator from '../../components/loading-indicator/LoadingIndicator';
+import CreatePlan from '../../pages/create-plan/CreatePlan';
+import RegionPage from '../../pages/region/Region';
 import Navbar from '../../components/navbar/Navbar';
 import Config from '../../config/Config';
 
@@ -82,6 +84,19 @@ export default {
   components: {
     LoadingIndicator,
     Navbar,
+  },
+  methods: {
+    goCreate() {
+      this.$emit('push-page', {
+        extends: CreatePlan,
+        onsNavigatorProps: {
+          msg: 42,
+        }
+      })
+    },
+    goRegion() {
+      this.$emit('push-page', RegionPage)
+    }
   },
   data() {
     return {
