@@ -43,7 +43,7 @@
     </v-ons-list>
     <br>
     <center>
-      <v-ons-button modifier="cta" style="margin: 6px 0" @click="addCourse">
+      <v-ons-button modifier="cta" style="margin: 6px 0" @click="checkCourse">
         <span v-if="edit">変更</span>
         <span v-else>コース追加</span>
       </v-ons-button>
@@ -89,6 +89,15 @@ export default {
 
   },
   methods: {
+    checkCourse() {
+      if (this.course.name == '') {
+        this.$ons.notification.alert('場所を入力してください');
+        return
+      } else {
+        this.addCourse();
+      }
+
+    },
     addCourse() {
       this.$store.commit('addCourse', { 
         edit: this.edit,

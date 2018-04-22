@@ -3,6 +3,9 @@ export default {
     courses: [],
   },
   mutations: {
+    initCourse(state) {
+      state.courses = [];
+    },
     addCourse(state, params) {
       if (params.edit) {
         state.courses[params.index] = params.data;

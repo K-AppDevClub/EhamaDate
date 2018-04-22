@@ -4,16 +4,16 @@
     <v-ons-list>
       <v-ons-list-header>情報</v-ons-list-header>
       <v-ons-list-item>
-        <v-ons-input placeholder="プラン名" float v-model="planname"></v-ons-input>
+        <v-ons-input placeholder="プラン名" float v-model="plan.title"></v-ons-input>
       </v-ons-list-item>
       <v-ons-list-item>
-        <v-ons-input placeholder="概要" float v-model="description"></v-ons-input>
+        <v-ons-input placeholder="概要" float v-model="plan.detail"></v-ons-input>
       </v-ons-list-item>
 
       <v-ons-list-header>エリア</v-ons-list-header>
       <v-ons-list-item>
         <div class="center">
-          <v-ons-select style="width: 40%" v-model="pref_id" >
+          <v-ons-select style="width: 40%" v-model="plan.prefecture_id" >
             <option v-for="item in prefs" :value="item.id" v-bind:key="item.id">
               {{ item.name }}
             </option>
@@ -37,7 +37,7 @@
     </v-ons-list>
     <br>
     <center>
-      <v-ons-button modifier="cta" @click="postPlan();">プラン作成</v-ons-button>
+      <v-ons-button modifier="cta" @click="checkPlan();">プラン作成</v-ons-button>
     </center>
   </ons-page>
 </template>
@@ -54,10 +54,13 @@ export default {
   },
   data() {
     return {
-      planname: '',
-      description: '',
+      plan: {
+        title: '',
+        detail: '',
+        prefecture_id: null,
+        courses_attributes: {},
+      },
       prefs: [],
-      pref_id: null,
     };
   },
   computed: {
@@ -75,10 +78,10 @@ export default {
       console.log(res);
     });
   },
+  destroyed() {
+    this.$store.commit('initCourse');
+  },
   methods: {
-    aai(item){
-      console.log(item)
-    },
     addCourse(num) {
       this.$emit('push-page', {
         extends: AddCourse,
@@ -90,18 +93,26 @@ export default {
     removeCourse(num) {
       this.$store.commit('removeCourse', num);
     },
+    checkPlan() {
+      if (this.plan.title == '') {
+        this.$ons.notification.alert('プラン名を入力してください');
+        return
+      } else if (this.plan.prefecture_id == null) {
+        this.$ons.notification.alert('エリアを選択してください');
+        return
+      } else {
+        this.$ons.notification.confirm('プランを作成しますか？')
+        .then((res) => {
+          if (res == 1) this.postPlan();
+        });
+      }
+    },
     postPlan() {
-      const courses_params = {};
       this.courses.forEach((v)=>{
-        courses_params[v.uniq] = v
+        this.plan.courses_attributes[v.uniq] = v
       });
       axios.post('http://59.157.6.140:3000/plans', {
-        plan: {
-          title: this.planname,
-          detail: this.description,
-          prefecture_id: this.pref_id,
-          courses_attributes: courses_params,
-        },
+        plan: this.plan,
       })
       .then(res => console.log(res));
     },
