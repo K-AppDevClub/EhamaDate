@@ -6,6 +6,7 @@ import 'onsenui/css/onsen-css-components.css';
 import Element from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import locale from 'element-ui/lib/locale/lang/ja';
+import * as VueGoogleMaps from 'vue2-google-maps';
 
 import Vue from 'vue';
 import VueOnsen from 'vue-onsenui';
@@ -16,6 +17,12 @@ import routes from './routes';
 Vue.config.productionTip = false;
 
 Vue.use(Element, { locale });
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyC3FN2Ff1tNSnNyGMTgx2fR7-OB-4wPOWE',
+    libraries: 'places',
+  },
+});
 Vue.use(VueOnsen);
 Vue.use(VueRouter);
 

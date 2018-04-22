@@ -45,6 +45,7 @@ navbar {
         <v-ons-navigator swipeable
           :page-stack="pageStack"
           @push-page="pageStack.push($event);"
+          @pop-page="pageStack.pop();"
         ></v-ons-navigator>
         <!-- <router-view></router-view> -->
       </transition>
@@ -75,10 +76,6 @@ export default {
     SideMenu,
   },
   methods: {
-    aai(){
-      console.log("push-page event");
-      this.pageStack.push($event);
-    },
     onUserInteraction(event) {
       console.log(event);   // on click ons-splitter-side-mask, event always false(?)
       store.commit('toggleMenu', event);

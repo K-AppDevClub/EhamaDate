@@ -34,11 +34,8 @@
           {{region.name}}
         </v-ons-list-item>
     </v-ons-list>
-    <v-ons-card>
-    <h3>話題のデート体験記</h3>
-    <v-ons-carousel style="width: 100%; height: 200px"
-      swipeable auto-scroll overscrollable
-    >
+    <v-ons-list-header>話題のデート体験記</v-ons-list-header>
+    <v-ons-carousel style="width: 100%; height: 200px" swipeable auto-scroll overscrollable >
       <v-ons-carousel-item v-for='item in experiences' 
         :v-bind='item'
         :style="{backgroundColor: item.color}"
@@ -49,24 +46,9 @@
         <p style="margin-left: 10pt; margin-right: 10pt; color: #fff;">{{ item.detail }}</p>
       </v-ons-carousel-item>
     </v-ons-carousel>
-    </v-ons-card>
-    <v-ons-card>
-    <h3>新着記事</h3>
-    <v-ons-carousel style="width: 100%; height: 200px"
-      swipeable auto-scroll overscrollable
-    >
-      <v-ons-carousel-item v-for='item in newcards' 
-        :v-bind='item'
-        :style="{backgroundColor: item.color}"
-        >
-        <div style="tex-align: center; font-size: 30px; margin-top: 20px; margin-left: 10px; color: #fff;">
-          {{ item.title }}
-        </div>
-        <p style="margin-left: 10pt; margin-right: 10pt; color: #fff;">{{ item.detail }}</p>
-      </v-ons-carousel-item>
-    </v-ons-carousel>
-    </v-ons-card>
-    <v-ons-button modifier="cta" style="margin: 6px 0" @click="goCreate">作成</v-ons-button>
+    <v-ons-fab @click="goCreate" position="bottom right" >
+      <v-ons-icon icon="md-plus"></v-ons-icon>
+    </v-ons-fab>
   </div>
   </v-ons-page>
 </template>
@@ -119,24 +101,10 @@ export default {
           color: '#085078',
         },
         {
-          title: 'ほげ',
-          detail: 'hogehoge',
-          path: 'detail-plan',
-          color: '#373B44',
-        },
-      ],
-      newcards: [
-        {
           title: 'sawlowの遅漏体験',
           detail: '...',
           path: 'detail-plan',
           color: '#085078',
-        },
-        {
-          title: 'ほげ2',
-          detail: 'hogehoge',
-          path: 'detail-plan',
-          color: '#373B44',
         },
       ],
       carouselIndex: 0,
