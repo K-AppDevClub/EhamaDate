@@ -114,7 +114,11 @@ export default {
       axios.post('http://59.157.6.140:3000/plans', {
         plan: this.plan,
       })
-      .then(res => console.log(res));
+      .then(res => {
+        console.log(res)
+        this.$emit('pop-page');
+        this.$ons.notification.alert('プランを作成しました');
+      });
     },
   },
 };
