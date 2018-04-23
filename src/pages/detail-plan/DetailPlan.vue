@@ -1,30 +1,46 @@
 <template>
   <ons-page>
-    <navbar navType="back" msg="プラン詳細"></navbar>    
-    <v-ons-card>
-        <h2>{{post.title}}</h2>
-        <h4 >概要:</h4>
+    <navbar navType="back" msg="プラン詳細"></navbar>
+    <el-card class="box-card">
+        <div class="title">{{post.title}}
+          <div class="pull-right" style="font-size: 20px">
+            <i class="zmdi zmdi-comment-outline" style="color: green;" tappable @click="showPopover($event, 'left')"></i>
+            &nbsp;
+            &nbsp;
+            <i class="zmdi zmdi-favorite-outline" style="color: blue;"></i>
+            &nbsp;
+          </div>
+        </div>
+        <div class="pull-right" mergin-top="20px" > 作成者:hoshinari</div>
+    </el-card>
+    <el-carousel :interval="5000" arrow="always">
+      <el-carousel-item v-for="item in items" :key="item" >
+        <img v-bind:src="item.src" width="500" height=auto class = "img">
+      </el-carousel-item>
+    </el-carousel>
+    <el-card class="box-card">
+        <div class="bold">概要</div>
         <p>{{post.detail}}</p>
-    </v-ons-card>
-    <v-ons-card>
-        <h4>行ったスポット：</h4>
+    </el-card>
+    <el-card class="box-card">
+        <div class="bold">行ったスポット</div>
         <v-ons-list>
         <v-ons-list-item>Item A</v-ons-list-item>
         <v-ons-list-item>Item B</v-ons-list-item>
         </v-ons-list>
-    </v-ons-card>
-    <v-ons-card>
-        <h4>コース：</h4>
+    </el-card>
+    <el-card class="box-card">
+        <div class="bold">コース</div>
         <v-ons-list>
         <v-ons-list-item>Item A</v-ons-list-item>
         <v-ons-list-item>Item B</v-ons-list-item>
         </v-ons-list>
-    </v-ons-card>
-    <v-ons-card>
-        <h4>感想：</h4>
+    </el-card>
+    <el-card class="box-card">
+        <div class="bold">感想</div>
         <p>{{post.comment}}</p>
         <p></p>
-    </v-ons-card>
+    </el-card>
     <v-ons-button modifier="cta" style="margin: 60px 0px" @click="$router.push({ name: 'recommend' });">戻る</v-ons-button>
     <v-ons-button modifier="cta" style="margin: 60px 0px" @click="$router.push({ name: 'home' });">ホームへ</v-ons-button>
   </ons-page>
@@ -48,9 +64,19 @@ export default {
   },
   data() {
     return {
-      // url: 'http://59.157.6.140:3000/plans/1',
       url: `http://59.157.6.140:3000/plans/${this.plan_id}`,
       post: [],
+      value1: '',
+      items: [
+        {
+          id: 1,
+          src: 'http://journey-on-map.up.n.seesaa.net/journey-on-map/image/E382B9E382ABE382A4E38384E383AAE383BC.JPG?d=a2',
+        },
+        {
+          id: 2,
+          src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Tokyo_Dome_2007-12.jpg/1920px-Tokyo_Dome_2007-12.jpg',
+        }
+      ]
     };
   },
   created() {
@@ -61,8 +87,7 @@ export default {
       console.log(response);
     });
   },
-
-
+  
   // data() {
   //   return {
   //     items: {
@@ -77,4 +102,41 @@ export default {
   //   };
   // },
 };
+
 </script>
+<style>
+  
+  .el-carousel__item h3 {
+    color: #475669;
+    font-size: 18px;
+    opacity: 0.75;
+    line-height: 300px;
+    margin: 0;
+  }
+
+  /* .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  } */
+  .img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  }
+  .title{
+    font-weight:bold;
+    font-size: 24px;
+  }
+  .bold{
+    font-weight:bold;
+    font-size: 18px;
+  }
+</style>
+
+
