@@ -1,6 +1,7 @@
-# Onsen UI + Vue + Vue Router + Axios PWA Starter Project
+# えはまデート(EhamaDate)
 
 ## Information 
+Onsen UI + Vue + Vue Router + Axios + Cordova PWA Starter Project  
 Please read carefully before use this project starter
 
 1. This project is based on [onsenui-vue-pwa webpack template](https://github.com/OnsenUI/vue-pwa-webpack)
@@ -42,11 +43,18 @@ npm install
 # serve with hot reload at localhost:8080
 npm run dev
 
+# build for Android APK
+npm run build:android
+
+# debug for Android APK
+npm run debug:android
+
 # build for production with minification
 npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
+
 
 # run unit tests
 npm run unit
@@ -68,39 +76,3 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 - Vue routing using hash setup. [link](http://router.vuejs.org/en/essentials/getting-started.html)
 - Getting started with vuex. [link](http://vuex.vuejs.org/en/getting-started.html)
 - Delete service worker. [link](https://stackoverflow.com/a/34791693/1843755)
-
--------------------------------
-## Screenshots :
-
-<div>
-    <div style="width:50%;float:left;">
-        <p>Android</p>
-        <kbd>
-            <img src="screenshots/android.png" width="200px"/> 
-        </kbd>
-        <kbd>
-            <img src="screenshots/android-profile.png" width="200px"/> 
-        </kbd>
-        <kbd>
-            <img src="screenshots/android-blog.png" width="200px"/> 
-        </kbd>
-        <kbd>
-            <img src="screenshots/android-sidemenu.png" width="200px"/> 
-        </kbd>
-    </div>
-    <div style="width:50%;float:left;">
-        <p>iPhone</p>
-        <kbd>
-            <img src="screenshots/iphone.png" width="200px"/> 
-        </kbd>
-        <kbd>
-            <img src="screenshots/iphone-profile.png" width="200px"/> 
-        </kbd>
-        <kbd>
-            <img src="screenshots/iphone-blog.png" width="200px"/> 
-        </kbd>
-        <kbd>
-            <img src="screenshots/iphone-sidemenu.png" width="200px"/> 
-        </kbd>
-    </div>
-</div>

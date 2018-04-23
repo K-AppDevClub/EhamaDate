@@ -65,7 +65,10 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]'),
           publicPath: function(url) {
-            return url.replace(/static/, '..')
+            if (process.env.NODE_ENV === 'production')
+              return url.replace(/static/, '..') 
+            else
+              return url
           },
         }
       }
