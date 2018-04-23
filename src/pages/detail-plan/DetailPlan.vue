@@ -35,8 +35,6 @@
         <p>{{post.comment}}</p>
         <p></p>
     </v-ons-card>
-    <v-ons-button modifier="cta" style="margin: 60px 0px" @click="$router.push({ name: 'recommend' });">戻る</v-ons-button>
-    <v-ons-button modifier="cta" style="margin: 60px 0px" @click="$router.push({ name: 'home' });">ホームへ</v-ons-button>
   </ons-page>
 </template>
 
