@@ -16,8 +16,18 @@
     <v-ons-card>
         <h4>コース：</h4>
         <v-ons-list>
-        <v-ons-list-item>Item A</v-ons-list-item>
-        <v-ons-list-item>Item B</v-ons-list-item>
+          <v-ons-list-item v-for="course in courses" v-bind:key="course.id">
+            <table cellpadding="5">
+              <tr>
+                <td>{{ editTime(course.time) }}</td> 
+                <td>{{ course.name }}</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>{{ course.description }}</td>
+              </tr>
+            </table>
+          </v-ons-list-item>
         </v-ons-list>
     </v-ons-card>
     <v-ons-card>
@@ -25,8 +35,6 @@
         <p>{{post.comment}}</p>
         <p></p>
     </v-ons-card>
-    <v-ons-button modifier="cta" style="margin: 60px 0px" @click="$router.push({ name: 'recommend' });">戻る</v-ons-button>
-    <v-ons-button modifier="cta" style="margin: 60px 0px" @click="$router.push({ name: 'home' });">ホームへ</v-ons-button>
   </ons-page>
 </template>
 
@@ -51,15 +59,29 @@ export default {
       // url: 'http://59.157.6.140:3000/plans/1',
       url: `http://59.157.6.140:3000/plans/${this.plan_id}`,
       post: [],
+      courses: [],
     };
   },
   created() {
-    console.log(this.plan_id);
     axios.get(this.url)
-    .then((response) => {
-      this.post = response.data;
-      console.log(response);
+    .then((res) => {
+      this.post = res.data;
+      this.courses = res.data.courses;
+      console.log(this.courses);
     });
+  },
+  methods: {
+    editTime(time){
+      if(time){
+        let a = new Date(time);
+        let hours = (a.getHours() < 10) ? '0' + a.getHours() : a.getHours();
+        let minutes = (a.getMinutes() < 10) ? '0' + a.getMinutes() : a.getMinutes();      
+        let str = hours + ':' + minutes;
+        return str;
+      }else{
+        return '';
+      }
+    },
   },
 
 
