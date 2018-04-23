@@ -37,7 +37,7 @@
             <i class="zmdi zmdi-favorite-outline" style="color: blue;"></i>
             &nbsp;
           </div>
-          <div class="center" tappable @click="goPlan">
+          <div class="center" tappable @click="goPlan(plan.id)">
             <span class="list-item__title">
               {{ plan.title }}
             </span>
@@ -110,11 +110,11 @@ export default {
   //   console.log(this.$route.params.id);
   // },
   methods: {
-    goPlan() {
+    goPlan(id) {
       this.$emit('push-page', {
         extends: DetailPlan,
         onsNavigatorProps: {
-          plan_id: 1,
+          plan_id: id,
         }
       })
     },
