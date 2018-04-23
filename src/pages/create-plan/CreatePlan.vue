@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Navbar from '../../components/navbar/Navbar';
 import AddCourse from '../../pages/add-course/AddCourse';
 
@@ -69,7 +68,7 @@ export default {
     }
   },
   mounted() {
-    axios.get('http://59.157.6.140:3000/prefectures')
+    this.axios.get('http://59.157.6.140:3000/prefectures')
     .then((res) => {
       this.prefs = res.data;
       this.prefs.unshift({id: null, name: 'エリアを選択'});
@@ -111,7 +110,7 @@ export default {
       this.courses.forEach((v)=>{
         this.plan.courses_attributes[v.uniq] = v
       });
-      axios.post('http://59.157.6.140:3000/plans', {
+      this.axios.post('http://59.157.6.140:3000/plans', {
         plan: this.plan,
       })
       .then(res => {

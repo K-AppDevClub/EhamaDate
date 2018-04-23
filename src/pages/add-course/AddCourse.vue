@@ -52,7 +52,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Navbar from '../../components/navbar/Navbar';
 
 export default {

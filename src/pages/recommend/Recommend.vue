@@ -81,7 +81,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Navbar from '../../components/navbar/Navbar';
 import PlanComponent from '../../components/plan/Plan';
 import DetailPlan from '../../pages/detail-plan/DetailPlan';
@@ -99,7 +98,7 @@ export default {
   },
   mounted() {
     const apiURL = `http://59.157.6.140:3000/prefectures/${this.pref_id}`;
-    axios.get(apiURL).then((res) => {
+    this.axios.get(apiURL).then((res) => {
       this.plans = res.data.plans;
       this.planname = `${res.data.name}のデートスポット`;
       console.log(res);

@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Navbar from '../../components/navbar/Navbar';
 import EhamaForm from '../../components/form/Form';
 
@@ -63,7 +62,7 @@ export default {
     };
   },
   created() {
-    axios.get(this.url)
+    this.axios.get(this.url)
     .then((res) => {
       this.post = res.data;
       this.courses = res.data.courses;

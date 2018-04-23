@@ -11,6 +11,8 @@ import * as VueGoogleMaps from 'vue2-google-maps';
 import Vue from 'vue';
 import VueOnsen from 'vue-onsenui';
 import VueRouter from 'vue-router';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 import App from './App';
 import routes from './routes';
 
@@ -25,6 +27,7 @@ Vue.use(VueGoogleMaps, {
 });
 Vue.use(VueOnsen);
 Vue.use(VueRouter);
+Vue.use(VueAxios, axios);
 
 const router = new VueRouter({
   mode: 'hash',

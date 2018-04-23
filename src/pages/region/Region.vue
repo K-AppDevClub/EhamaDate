@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Navbar from '../../components/navbar/Navbar';
 import Recommend from '../../pages/recommend/Recommend';
 
@@ -30,13 +29,13 @@ export default {
   },
   data() {
     const arr = [];
-    axios.get('http://59.157.6.140:3000/regions')
+    this.axios.get('http://59.157.6.140:3000/regions')
     .then((res) => {
       for (let i = 0; i < res.data.length; i += 1) {
         const regions = { label: res.data[i].name, id: res.data[i].id, children: [] };
         arr.push(regions);
       }
-      axios.get('http://59.157.6.140:3000/prefectures')
+      this.axios.get('http://59.157.6.140:3000/prefectures')
       .then((res) => {
         for (let j = 0; j < res.data.length; j += 1) {
           const prefectures = {

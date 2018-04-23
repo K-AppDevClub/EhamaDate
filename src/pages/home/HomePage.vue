@@ -54,7 +54,6 @@
 </template>
 
 <script>
-// import axios from 'axios';
 import LoadingIndicator from '../../components/loading-indicator/LoadingIndicator';
 import CreatePlan from '../../pages/create-plan/CreatePlan';
 import RegionPage from '../../pages/region/Region';
