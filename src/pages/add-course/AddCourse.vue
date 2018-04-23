@@ -72,6 +72,7 @@ export default {
         description: '',
         time: "19:00",
         place_id: '',
+        thumbnail: '',
       },
       edit: false,
       idx: 0,
@@ -109,6 +110,7 @@ export default {
       console.log(place);
       this.course.name = place.name;
       this.course.place_id = place.place_id;
+      this.course.thumbnail = place.photos[0].getUrl({'maxWidth': 400, });
     },
     resetPlace() {
       this.course.name = '';

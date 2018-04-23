@@ -5,20 +5,6 @@
 .body {
   margin-top: 50px;
 }
-.el-carousel__item h3 {
-    color: #475669;
-    font-size: 14px;
-    opacity: 0.75;
-    line-height: 150px;
-    margin: 0;
-  }
-
-  .el-carousel__item:nth-child(2n) {
-    background-color: #99a9bf;
-  }
-  .el-carousel__item:nth-child(2n+1) {
-    background-color: #d3dce6;
-  }
 </style>
 
 <template>
@@ -26,27 +12,24 @@
     <navbar></navbar>
   <div class='page-content' align='center'>
     <v-ons-list> 
-    <v-ons-list-header>
-      <img src="../../assets/love.jpeg" width="12" height="12">
-      デートプランを探す
-    </v-ons-list-header>
-        <v-ons-list-item v-for='region in regions' :v-bind='region.name' @click="goRegion">
-          {{region.name}}
-        </v-ons-list-item>
+      <v-ons-list-header>
+        <v-ons-icon icon="ion-favorite, material:md-favorite"></v-ons-icon>
+        デートプランを探す
+      </v-ons-list-header>
+      <v-ons-list-item @click="goRegion">地域で探す</v-ons-list-item>
+      <v-ons-list-item @click="goRegion">プランで探す</v-ons-list-item>
     </v-ons-list>
     <v-ons-list-header>話題のデート体験記</v-ons-list-header>
-    <v-ons-carousel style="width: 100%; height: 200px" swipeable auto-scroll overscrollable >
-      <v-ons-carousel-item v-for='item in experiences' 
-        :v-bind='item'
-        :style="{backgroundColor: item.color}"
-        >
-        <div style="tex-align: center; font-size: 30px; margin-top: 20px; margin-left: 10px; color: #fff;">
-          {{ item.title }}
-        </div>
-        <p style="margin-left: 10pt; margin-right: 10pt; color: #fff;">{{ item.detail }}</p>
-      </v-ons-carousel-item>
-    </v-ons-carousel>
-    <v-ons-fab @click="goCreate" position="bottom right" >
+    <v-ons-card v-for='item in experiences' :v-bind='item' v-bind:key="item.id">
+      <img v-bind:src="item.courses[0].thumbnail" style="width: 100%">
+      <div class="title">
+        {{ item.title }}
+      </div>
+      <div class="content">
+        {{ item.detail }}
+      </div>
+    </v-ons-card>
+    <v-ons-fab @click="goCreate" style="position:fixed;" modifier="material" position="bottom right" >
       <v-ons-icon icon="md-plus"></v-ons-icon>
     </v-ons-fab>
   </div>
@@ -68,54 +51,38 @@ export default {
   },
   methods: {
     goCreate() {
-      this.$emit('push-page', {
-        extends: CreatePlan,
-        onsNavigatorProps: {
-          msg: 42,
-        }
-      })
+      this.$emit('push-page', CreatePlan)
     },
     goRegion() {
       this.$emit('push-page', RegionPage)
     }
   },
+  created() {
+    this.axios.get("http://59.157.6.140:3000/plans")
+    .then((res) => {
+      console.log(res.data);
+      this.experiences = res.data
+    });
+  },
   data() {
     return {
       config: Config,
-      regions: [
-        {
-          name: '地域で探す',
-          url: 'region',
-        },
-        {
-          name: 'プランで探す',
-          url: 'home',
-        },
-      ],
       experiences: [
         {
           title: 'えはまの奮発日記',
           detail: 'tinderで知り合った女性と食事することになりました。しかし女性の右手には...',
           path: 'detail-plan',
           color: '#085078',
+          courses: [{thumbnail:""}]
         },
         {
           title: 'sawlowの遅漏体験',
           detail: '...',
           path: 'detail-plan',
           color: '#085078',
+          courses: [{thumbnail:""}]
         },
       ],
-      carouselIndex: 0,
-      dots: {
-        textAlign: 'center',
-        fontSize: '30px',
-        color: '#fff',
-        position: 'absolute',
-        bottom: '40px',
-        left: 0,
-        right: 0,
-      },
     };
   },
 };

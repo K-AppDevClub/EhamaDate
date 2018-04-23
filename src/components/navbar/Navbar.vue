@@ -22,7 +22,7 @@
     <div v-else-if="navType=='back'" class="left">
       <v-ons-back-button>戻る</v-ons-back-button>
     </div>
-    <div class="center">{{ msg }}</div>
+    <div class="center" style="font-size: 15px;font-weight:800;">{{ msg }}</div>
   </v-ons-toolbar>
 </template>
 

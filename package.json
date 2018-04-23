@@ -17,6 +17,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "@google/maps": "^0.4.6",
     "axios": "^0.16.2",
     "element-ui": "^2.3.4",
     "onsenui": "~2.9.0",
