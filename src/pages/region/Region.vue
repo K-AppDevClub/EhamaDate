@@ -64,12 +64,15 @@ export default {
   methods: {
     handleNodeClick(data) {
       if (!data.children) {
-        this.$emit('push-page', {
-          extends: Recommend,
-          onsNavigatorProps: {
-            pref_id: data.id,
-          }
-        })
+        console.log(data)
+        this.$store.commit('setArea', { id: data.id, name: data.label} );
+        this.$emit('pop-page');
+        // this.$emit('push-page', {
+        //   extends: Recommend,
+        //   onsNavigatorProps: {
+        //     pref_id: data.id,
+        //   }
+        // })
         // this.$router.push({ name: 'recommend', params: { id: data.id } });
         console.log(data.id);
       }

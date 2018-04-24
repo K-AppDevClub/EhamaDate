@@ -16,10 +16,10 @@
         <v-ons-icon icon="ion-favorite, material:md-favorite"></v-ons-icon>
         デートプランを探す
       </v-ons-list-header>
-      <v-ons-list-item @click="goRegion">地域で探す</v-ons-list-item>
-      <v-ons-list-item @click="goRegion">プランで探す</v-ons-list-item>
+      <v-ons-list-item @click="goRegion">地域:  {{currentArea.name}}</v-ons-list-item>
+      <v-ons-list-item @click="goRegion">並び順：人気順</v-ons-list-item>
     </v-ons-list>
-    <v-ons-list-header>話題のデート体験記</v-ons-list-header>
+    <!-- <v-ons-list-header>話題のデート体験記</v-ons-list-header> -->
     <v-ons-card v-for='item in experiences' :v-bind='item' v-bind:key="item.id" @click="goPlan(item.id)">
       <img v-bind:src="item.courses[0].thumbnail" style="width: 100%">
       <div class="title">
@@ -94,5 +94,10 @@ export default {
       ],
     };
   },
+  computed: {
+    currentArea() {
+      return this.$store.state.currentArea;
+    },
+  }
 };
 </script>

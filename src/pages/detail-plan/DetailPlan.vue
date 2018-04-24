@@ -23,13 +23,6 @@
         <p>{{post.detail}}</p>
     </el-card>
     <el-card class="box-card">
-        <div class="bold">行ったスポット</div>
-        <v-ons-list>
-        <v-ons-list-item>Item A</v-ons-list-item>
-        <v-ons-list-item>Item B</v-ons-list-item>
-        </v-ons-list>
-    </el-card>
-    <el-card class="box-card">
         <div class="bold">コース</div>
         <v-ons-list>
           <v-ons-list-item v-for="course in courses" v-bind:key="course.id">

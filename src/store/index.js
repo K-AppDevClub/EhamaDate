@@ -12,6 +12,7 @@ export default new Vuex.Store({
   },
   state: {
     menuIsOpen: false,
+    currentArea: { id: 1, name: '北海道' },
   },
   mutations: {
     toggleMenu(state, isToggle) {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
       } else {
         state.menuIsOpen = !state.menuIsOpen;
       }
+    },
+    setArea(state, data) {
+      state.currentArea = data;
     },
   },
 });
