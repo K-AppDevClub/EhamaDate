@@ -20,7 +20,7 @@
       <v-ons-list-item @click="goRegion">プランで探す</v-ons-list-item>
     </v-ons-list>
     <v-ons-list-header>話題のデート体験記</v-ons-list-header>
-    <v-ons-card v-for='item in experiences' :v-bind='item' v-bind:key="item.id">
+    <v-ons-card v-for='item in experiences' :v-bind='item' v-bind:key="item.id" @click="goPlan(item.id)">
       <img v-bind:src="item.courses[0].thumbnail" style="width: 100%">
       <div class="title">
         {{ item.title }}
@@ -40,6 +40,7 @@
 import LoadingIndicator from '../../components/loading-indicator/LoadingIndicator';
 import CreatePlan from '../../pages/create-plan/CreatePlan';
 import RegionPage from '../../pages/region/Region';
+import DetailPlan from '../../pages/detail-plan/DetailPlan';
 import Navbar from '../../components/navbar/Navbar';
 import Config from '../../config/Config';
 
@@ -55,7 +56,15 @@ export default {
     },
     goRegion() {
       this.$emit('push-page', RegionPage)
-    }
+    },
+    goPlan(id) {
+      this.$emit('push-page', {
+        extends: DetailPlan,
+        onsNavigatorProps: {
+          plan_id: id,
+        }
+      })
+    },
   },
   created() {
     this.axios.get("http://59.157.6.140:3000/plans")

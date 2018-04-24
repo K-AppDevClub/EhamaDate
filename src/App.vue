@@ -42,12 +42,7 @@ navbar {
 
     <v-ons-splitter-content>
       <transition name="slide-fade">
-        <v-ons-navigator swipeable
-          :page-stack="pageStack"
-          @push-page="pageStack.push($event);"
-          @pop-page="pageStack.pop();"
-        ></v-ons-navigator>
-        <!-- <router-view></router-view> -->
+        <router-view></router-view>
       </transition>
     </v-ons-splitter-content>
   </v-ons-splitter>

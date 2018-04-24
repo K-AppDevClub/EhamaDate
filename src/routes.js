@@ -1,4 +1,4 @@
-import HomePage from './pages/home/HomePage';
+import HomeBase from './pages/home/Base';
 import PostsPage from './pages/posts/PostsPage';
 import TestPage from './pages/test/Test';
 
@@ -10,7 +10,7 @@ import UserPage from './pages/user-page/UserPage';
 
 
 export default [
-  { name: 'home', path: '/', component: HomePage },
+  { name: 'home', path: '/', component: HomeBase },
   { name: 'posts', path: '/posts', component: PostsPage },
   { name: 'test', path: '/test', component: TestPage },
   { name: 'create-plan', path: '/create-plan', component: CreatePlan },
