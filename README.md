@@ -7,11 +7,6 @@ Please read carefully before use this project starter
 1. This project is based on [onsenui-vue-pwa webpack template](https://github.com/OnsenUI/vue-pwa-webpack)
 2. Since I dont need PWA at the moment, so I remove all the script related to PWA in `index.html`. If you want to use PWA, just rename `index-serviceworker.html` to `index.html`
 3. Since I need to access the page via URL in the browser, so instead of using Onsen ui `<v-ons-navigator>` system, I use [vue-router](https://router.vuejs.org/en/) to meet my requirement.
-4. For some pages and components I split the `html` and `scss` in `*.vue` into  separate file for my convenience, following [Ionic2 project structure](https://www.joshmorony.com/ionic-2-first-look-series-your-first-ionic-2-app-explained/). However if you prefer the vue way, you can use common [vue project structure](https://github.com/vuejs-templates/webpack/tree/master/template/src).
-5. Use `eslint-airbnb`, thus every line of code should follow [airbnb javascript style guide](http://airbnb.io/javascript/)
-6. Additional rules was added to eslintrc.js as follows : 
-    - `'no-console': 0`,        // allow console.log
-    - `'no-param-reassign': 0`  // disable warning when assignment to property of function parameter
 
 -------------------------------
 
@@ -75,6 +70,7 @@ Example for macOS.
 brew install gradle
 ```
 ### 4. Agree Android SDK license
+Example for macOS. 
 ```
 ~/Library/Android/sdk/tools/bin/sdkmanager --licenses
 ```
@@ -88,8 +84,20 @@ npm run build:android
 npm run debug:android
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Build Setup for iOS
 
+### 1. Install cordova.
+```
+sudo npm install -g cordova
+```
+### 2. Run build command
+```
+# build for Android APK
+npm run build:ios
+
+# debug for Android APK
+npm run debug:ios
+```
 -------------------------------
 
 ## Reference : 
