@@ -43,18 +43,11 @@ npm install
 # serve with hot reload at localhost:8080
 npm run dev
 
-# build for Android APK
-npm run build:android
-
-# debug for Android APK
-npm run debug:android
-
 # build for production with minification
 npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
-
 
 # run unit tests
 npm run unit
@@ -64,6 +57,30 @@ npm run e2e
 
 # run all tests
 npm test
+```
+
+## Build Setup for Android
+
+### 1. Install cordova.
+```
+sudo npm install -g cordova
+```
+### 2. Install JDK leatest version. 
+ Uninstall old version JDK if appear errors.  
+
+### 3. Install Android Studio.
+Install gradle if appear errors.  
+Example for macOS. 
+```
+brew install gradle
+```
+### 4. Run build command
+```
+# build for Android APK
+npm run build:android
+
+# debug for Android APK
+npm run debug:android
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
