@@ -74,7 +74,12 @@ Example for macOS.
 ```
 brew install gradle
 ```
-### 4. Run build command
+### 4. Agree Android SDK license
+```
+~/Library/Android/sdk/tools/bin/sdkmanager --licenses
+```
+
+### 5. Run build command
 ```
 # build for Android APK
 npm run build:android
